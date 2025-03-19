@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colorful Holi Wishes</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff92a5, #ffc3a0);
+      overflow: hidden;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 80px;
+      margin-top: 50px;
+      background: linear-gradient(45deg, #ff007f, #ffae00, #00c2cb, #ff007f);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 3s infinite linear;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/72/Rose_icon.svg');
+      background-size: cover;
+      animation: fall 5s linear forwards;
+    }
+
+    .blast {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(255, 69, 96, 0.8), rgba(255, 255, 255, 0));
+      border-radius: 50%;
+      animation: blastEffect 1.5s ease-out forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotateZ(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes blastEffect {
+      to {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+
+    #holiMessage {
+      display: none;
+      font-size: 60px;
+      color: #fff;
+      margin-top: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #colorGun {
+      margin-top: 20px;
+      background-color: #ff007f;
+      color: white;
+      font-size: 24px;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #colorGun:hover {
+      background-color: #ffae00;
+    }
+
+    #colorGun:active {
+      transform: scale(0.9);
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 18px;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+  h1 { font-size: 40px; }
+  p { font-size: 16px; }
+  #colorGun { font-size: 18px; padding: 10px 20px; }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Happy Holi! Let the Colors of Joy Shine!</h1>
+  <p>May your Holi be filled with laughter, colors, and unforgettable memories!</p>
+  
+  <button id="colorGun" onclick="startCelebration()">💦 Splash Colors 💦</button>
+  
+  <h2 id="holiMessage">🌸🌿 Happy Holi from Salunkhe and Family! 🌿🌸</h2>
+
+  <footer>Created by Aishwarya Salunkhe</footer>
+
+  <script>
+    function createEffect() {
+      for (let i = 0; i < 30; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = `${Math.random() * window.innerWidth}px`;
+        petal.style.top = `${-50}px`;
+        document.body.appendChild(petal);
+        petal.addEventListener('animationend', () => petal.remove());
+      }
+      
+      for (let i = 0; i < 5; i++) {
+        const blast = document.createElement('div');
+        blast.classList.add('blast');
+        const colors = ['rgba(255, 69, 96, 0.8)', 'rgba(0, 128, 255, 0.8)', 'rgba(255, 215, 0, 0.8)', 'rgba(50, 205, 50, 0.8)'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        blast.style.background = `radial-gradient(circle, ${randomColor}, rgba(255, 255, 255, 0))`;
+        blast.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
+        blast.style.top = `${Math.random() * (window.innerHeight - 150)}px`;
+        document.body.appendChild(blast);
+        blast.addEventListener('animationend', () => blast.remove());
+      }
+    }
+
+    function startCelebration() {
+      document.getElementById('holiMessage').style.display = 'block';
+      const interval = setInterval(createEffect, 500);
+      setTimeout(() => clearInterval(interval), 60000); // Stops after 1 minute
+    }
+  </script>
+</body>
+</html>
